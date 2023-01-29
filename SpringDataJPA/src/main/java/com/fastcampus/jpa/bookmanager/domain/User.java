@@ -25,7 +25,6 @@ public class User {
     @NonNull
     private String email; //이메일
 
-    private String address; //주소
 
     private LocalDateTime createdAt; //생성 시간
 
