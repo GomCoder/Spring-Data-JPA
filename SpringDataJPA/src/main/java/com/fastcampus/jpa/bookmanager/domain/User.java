@@ -3,10 +3,9 @@ package com.fastcampus.jpa.bookmanager.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,4 +28,7 @@ public class User {
     private LocalDateTime createdAt; //생성 시간
 
     private LocalDateTime updatedAt; //수정 시간
+
+    //@OneToMany(fetch = FetchType.EAGER)
+    //private List<Address> addresses; //주소
 }
