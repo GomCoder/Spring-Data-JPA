@@ -1,5 +1,6 @@
 package com.fastcampus.jpa.bookmanager.repository;
 
+import com.fastcampus.jpa.bookmanager.domain.Gender;
 import com.fastcampus.jpa.bookmanager.domain.User;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -24,12 +25,12 @@ class UserRepositoryTest {
 
     @Test
     void crud() { //create, read, update, delete
-        userRepository.save(new User("david", "david@fastcampus.com"));
-
-        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
-        user.setEmail("martin-updated@fastcampus.com");
-
-        userRepository.save(user);
+//        userRepository.save(new User("david", "david@fastcampus.com"));
+//
+//        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+//        user.setEmail("martin-updated@fastcampus.com");
+//
+//        userRepository.save(user);
     }
 
     @Test
@@ -83,7 +84,8 @@ class UserRepositoryTest {
         //System.out.println("findFirstByNameOrderByIdDescEmailAsc : " + userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
         //System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("martin", Sort.by(Order.desc("id"), Order.asc("email"))));
 //        System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("martin", getSort()));
-        System.out.println("findByNameWithPaging: " + userRepository.findByName("martin", PageRequest.of(1,1,Sort.by(Order.desc("id")))).getTotalElements());
+        //System.out.println("findByNameWithPaging: " + userRepository.findByName("martin", PageRequest.of(1,1,Sort.by(Order.desc("id")))).getTotalElements());
+
 
     }
 
@@ -95,4 +97,31 @@ class UserRepositoryTest {
 //                Order.desc("updatedAt")
 //        );
 //    }
+
+    @Test
+    void insertAndUpdateTest() {
+        User user = new User();
+        user.setName("martin");
+        //user.setEmail("martin@fastcampus.com");
+
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("marrrrrtin");
+
+        userRepository.save(user2);
+    }
+
+    @Test
+    void enumTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+
+        userRepository.findAll().forEach(System.out::println);
+
+        System.out.println(userRepository.findRowRecord().get("gender"));
+    }
+
 }
