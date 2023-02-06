@@ -47,6 +47,75 @@ public class BookRepositoryTest {
         System.out.println("Publisher : " + user.getReviews().get(0).getBook().getPublisher());
     }
 
+    @Test
+    void bookCascasdeTest() {
+        Book book = new Book();
+        book.setName("JPA 초격차 패키지");
+
+//        bookRepository.save(book);
+
+        Publisher publisher = new Publisher();
+        publisher.setName("패스트캠퍼스");
+
+//        publisherRepository.save(publisher);
+
+        book.setPublisher(publisher);//연관관계 맺음
+        bookRepository.save(book);
+
+//        publisher.addBook(book);
+//        publisherRepository.save(publisher);
+
+
+        System.out.println("books: " + bookRepository.findAll());
+        System.out.println("publishers: " + publisherRepository.findAll());
+
+        Book book1 = bookRepository.findById(1L).get();
+        book1.getPublisher().setName("슬로우캠퍼스");
+        bookRepository.save(book1);
+
+        System.out.println("publisher: " + publisherRepository.findAll());
+
+        Book book2 = bookRepository.findById(1L).get();
+//        bookRepository.delete(book2);
+//        bookRepository.deleteById(1L);
+
+//        publisherRepository.delete(book2.getPublisher());
+
+        Book book3 = bookRepository.findById(1L).get();
+        book3.setPublisher(null);
+
+        bookRepository.save(book3);
+
+        System.out.println("books: " + bookRepository.findAll());
+        System.out.println("publishers: " + publisherRepository.findAll());
+        System.out.println("book3-publisher: " + bookRepository.findById(1L).get().getPublisher());
+    }
+
+    @Test
+    void bookRemoveCasecadeTest() {
+
+        bookRepository.deleteById(1L);
+
+        System.out.println("books : " + bookRepository.findAll());
+        System.out.println("publishers :" + publisherRepository.findAll());
+
+        bookRepository.findAll().forEach(book -> System.out.println(book.getPublisher()));
+    }
+
+    @Test
+    void softDeleted() {
+        bookRepository.findAll().forEach(System.out::println);
+        System.out.println(bookRepository.findById(3L));
+
+//        bookRepository.findByCategoryIsNull().forEach(System.out::println);
+
+//        bookRepository.findAllByDeletedFalse().forEach(System.out::println);
+//        bookRepository.findByCategoryIsNullAndDeletedFalse().forEach(System.out::println);
+
+    }
+
+
+
     private void givenBookAndReview() {
         givenReview(givenUser(), givenBook(givenPublisher()));
     }

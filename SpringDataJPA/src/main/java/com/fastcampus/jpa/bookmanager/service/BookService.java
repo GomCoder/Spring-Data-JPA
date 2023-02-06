@@ -32,7 +32,7 @@ public class BookService {
         book.setName("JPA 시작하기");
 
         bookRepository.save(book);
-        
+
         try {
             authorService.putAuthor();
         }catch(RuntimeException e) {
