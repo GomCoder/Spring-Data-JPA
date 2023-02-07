@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 public class BookRepositoryTest {
@@ -142,7 +143,26 @@ public class BookRepositoryTest {
                 bookNameAndCategory -> System.out.println(bookNameAndCategory.getCategory() + " : " + bookNameAndCategory.getName()));
         bookRepository.findBookNameAndCategory(PageRequest.of(0,  1)).forEach(
                 bookNameAndCategory -> System.out.println(bookNameAndCategory.getName() + " : " + bookNameAndCategory.getCategory()));
+    }
 
+    @Test
+    void nativeQueryTest() {
+//        bookRepository.findAll().forEach(System.out::println);
+//        bookRepository.findAllCustom().forEach(System.out::println);
+
+//        List<Book> books = bookRepository.findAll();
+//
+//        for(Book book: books) {
+//            book.setCategory("IT 전문서");
+//        }
+//
+//        bookRepository.saveAll(books);
+
+//        System.out.println(bookRepository.findAll());
+//        System.out.println("affected rows: " + bookRepository.updateCategories());
+//        bookRepository.findAllCustom().forEach(System.out::println);
+
+        System.out.println(bookRepository.showTables());
     }
 
 
