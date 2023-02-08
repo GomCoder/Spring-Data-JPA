@@ -1,10 +1,14 @@
 package com.fastcampus.jpa.bookmanager.domain;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.CustomSQLErrorCodesTranslation;
 
 import java.time.LocalDateTime;
 
 class UserTest {
+
+
     @Test
     void test() {
 
@@ -26,4 +30,5 @@ class UserTest {
         System.out.println("@NoArgsConstructor >>>> " + user.toString());
 
     }
+
 }
